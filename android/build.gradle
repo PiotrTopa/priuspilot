@@ -61,6 +61,15 @@ android {
 	}
 
 
+	signingConfigs {
+		debug {
+			storeFile file(System.getProperty('user.home') + '/.android/debug.keystore')
+			storePassword 'android'
+			keyAlias 'androiddebugkey'
+			keyPassword 'android'
+		}
+	}
+
 	compileOptions {
 		sourceCompatibility "8.0"
 		targetCompatibility "8.0"
@@ -71,6 +80,7 @@ android {
 			debuggable false
 			minifyEnabled false
 			shrinkResources false
+			signingConfig signingConfigs.debug
 		}
 	}
 }
@@ -125,7 +135,7 @@ dependencies {
 	implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 	implementation(name: 'snpe-release', ext:'aar')
 	implementation "org.capnproto:runtime:0.1.13"
-	implementation ('com.termux.termux-app:termux-shared:0.117'){
+	implementation ('com.github.termux.termux-app:termux-shared:v0.118.0'){
 		exclude ((HashMap) [group: 'com.google.code.findbugs', module: 'annotations'])
 		exclude ((HashMap) [group: 'com.google.code.findbugs', module: 'jsr305'])
 		exclude ((HashMap) [group: 'com.google.guava', module: 'guava'])

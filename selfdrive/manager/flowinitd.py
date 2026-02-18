@@ -32,7 +32,8 @@ POSSIBLE_PNAME_MATRIX = [
 ]
 ANDROID_APP = "ai.flow.app"
 ENV_VARS = ["USE_GPU", "ZMQ_MESSAGING_PROTOCOL", "ZMQ_MESSAGING_ADDRESS",
-            "SIMULATION", "FINGERPRINT", "MSGQ", "PASSIVE"]
+            "SIMULATION", "FINGERPRINT", "MSGQ", "PASSIVE", "DISCOVERABLE_PUBLISHERS",
+            "DEVICE_ADDR"]
 UNREGISTERED_DONGLE_ID = "UnregisteredDevice"
 
 params = Params()
@@ -78,10 +79,10 @@ def main():
                 proc.kill()
 
         default_params = [
-                        ("CompletedTrainingVersion", "0"),
+                        ("CompletedTrainingVersion", "1"),
                         ("DisengageOnAccelerator", "1"),
-                        ("HasAcceptedTerms", "0"),
-                        ("FlowpilotEnabledToggle", "0"),
+                        ("HasAcceptedTerms", "1"),
+                        ("FlowpilotEnabledToggle", "1"),
                         ("WideCameraOnly", "1"),
                          ]
 

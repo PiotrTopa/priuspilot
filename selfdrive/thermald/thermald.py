@@ -127,7 +127,11 @@ def thermald_thread(end_event, hw_queue):
     if sm.updated['pandaStates'] and len(pandaStates) > 0:
 
       # Set ignition based on any panda connected
-      onroad_conditions["ignition"] = any(ps.ignitionLine or ps.ignitionCan for ps in pandaStates if ps.pandaType != log.PandaState.PandaType.unknown)
+      onroad_conditions["ignition"] = any(
+        ps.ignitionLine or ps.ignitionCan
+        for ps in pandaStates
+        if ps.pandaType not in (log.PandaState.PandaType.unknown, log.PandaState.PandaType.pedal)
+      )
       
       pandaState = pandaStates[0]
 
@@ -175,18 +179,16 @@ def thermald_thread(end_event, hw_queue):
 
     # Ensure date/time are valid
     now = datetime.datetime.utcnow()
-    startup_conditions["time_valid"] = (now.year > 2020) or (now.year == 2020 and now.month >= 10)
-    set_offroad_alert_if_changed("Offroad_InvalidTime", (not startup_conditions["time_valid"]))
+    startup_conditions["time_valid"] = True  # No time gatekeeping
 
-    startup_conditions["up_to_date"] = params.get("Offroad_ConnectivityNeeded") is None or params.get_bool("DisableUpdates") or params.get_bool("SnoozeUpdate")
+    startup_conditions["up_to_date"] = True  # No update checks
     startup_conditions["not_uninstalling"] = not params.get_bool("DoUninstall")
-    startup_conditions["accepted_terms"] = params.get_bool("HasAcceptedTerms")
+    startup_conditions["accepted_terms"] = True  # No terms gatekeeping
     startup_conditions["offroad_min_time"] = (not started_seen) or ((off_ts is not None) and (sec_since_boot() - off_ts) > 5.)
 
     # with 2% left, we killall, otherwise the phone will take a long time to boot
     startup_conditions["free_space"] = msg.deviceState.freeSpacePercent > 2
-    startup_conditions["completed_training"] = params.get_bool("CompletedTrainingVersion") or \
-                                               params.get_bool("Passive")
+    startup_conditions["completed_training"] = True  # No training gatekeeping
     # if any CPU gets above 107 or the battery gets above 63, kill all processes
     # controls will warn with CPU above 95 or battery above 60
     onroad_conditions["device_temp_good"] = thermal_status < ThermalStatus.danger

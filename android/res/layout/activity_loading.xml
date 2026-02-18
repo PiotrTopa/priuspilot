@@ -32,6 +32,6 @@
             android:layout_below="@+id/spinner"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"
-            android:text="Booting Flowpilot"
+            android:text="Booting PriusPilot"
             android:textColor="#ffffff" />
 </RelativeLayout>

@@ -126,8 +126,6 @@ public class OnRoadScreen extends ScreenAdapter {
     Animation<TextureRegion> animationNight, animationNoon, animationSunset;
     Map<String, String> offroadNotifications = new HashMap<String, String>() {{
         put("Offroad_TemperatureTooHigh", "Device temperature too high. System won't start.");
-        put("Offroad_ConnectivityNeeded", "Connect to internet to check for updates. flowpilot won't automatically start until it connects to internet to check for updates.");
-        put("Offroad_InvalidTime", "Invalid date and time settings, system won't start until date time are set correctly.");
     }};
     double elapsed;
 
@@ -281,7 +279,7 @@ public class OnRoadScreen extends ScreenAdapter {
         DateTimeFormatter f = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.US);
         dateLabel = new Label(LocalDateTime.now().format(f),  appContext.skin, "default-font-30", "white");
 
-        String version = params.exists("Version") ? "flowpilot v" + params.getString("Version") : "";
+        String version = params.exists("Version") ? "PriusPilot v" + params.getString("Version") : "";
         vesrionLabel = new Label(version,  appContext.skin, "default-font-30", "white");
         offRoadRootTable.add(dateLabel).align(Align.topLeft).padTop(15);
         offRoadRootTable.add(vesrionLabel).padTop(15).align(Align.topRight);
@@ -317,7 +315,7 @@ public class OnRoadScreen extends ScreenAdapter {
         else
             laneLess = false;
 
-        alertText1 = new Label("Flowpilot Unavailable", appContext.skin, "default-font-bold-med", "white");
+        alertText1 = new Label("PriusPilot Unavailable", appContext.skin, "default-font-bold-med", "white");
         alertText2 = new Label("Waiting for controls to start", appContext.skin, "default-font", "white");
 
         texImage = new Image(texture);
@@ -410,7 +408,7 @@ public class OnRoadScreen extends ScreenAdapter {
     }
 
     public void setDefaultAlert(){
-        alertText1.setText("Flowpilot Unavailable");
+        alertText1.setText("PriusPilot Unavailable");
         alertText2.setText("Waiting for controls to start");
     }
 

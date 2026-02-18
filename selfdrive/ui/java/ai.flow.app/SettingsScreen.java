@@ -80,7 +80,7 @@ public class SettingsScreen extends ScreenAdapter {
 
     public void fillSoftwareSettings(){
         currentSettingTable.clear();
-        String version = params.exists("Version") ? "flowpilot v" + params.getString("Version") : "";
+        String version = params.exists("Version") ? "PriusPilot v" + params.getString("Version") : "";
         addKeyValueTable(currentSettingTable, "Version", version, true);
 
         addKeyValueTable(currentSettingTable, "Last Updated", "", true);
@@ -93,12 +93,12 @@ public class SettingsScreen extends ScreenAdapter {
         addKeyValueTable(currentSettingTable, "Git Commit", commit, true);
 
         addKeyValueTable(currentSettingTable, "Device Type", SystemUtils.getPlatform(), true);
-        addKeyValueTable(currentSettingTable, "Uninstall FlowPilot", buttonUninstall, false);
+        addKeyValueTable(currentSettingTable, "Uninstall PriusPilot", buttonUninstall, false);
     }
 
     public void fillToggleSettings(){
         currentSettingTable.clear();
-        addKeyValueTable(currentSettingTable, "Enable FlowPilot", FPToggle, true);
+        addKeyValueTable(currentSettingTable, "Enable PriusPilot", FPToggle, true);
         addKeyValueTable(currentSettingTable, "Enable Lane Departure Warnings", LDWToggle, true);
         addKeyValueTable(currentSettingTable, "Enable Right Hand Driving", RHDToggle, true);
         addKeyValueTable(currentSettingTable, "Use Metric System", MetricToggle, true);
